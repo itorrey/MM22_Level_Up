@@ -18,7 +18,7 @@ const resourceValues = {
 }
 
 function updateResourceList(startLevel, endLevel) {
-    console.log(startLevel, endLevel);
+    getResources('rare', startLevel, endLevel);
 }
 
 function getResources(rarity, startLevel, endLevel) {
@@ -44,5 +44,5 @@ function getResources(rarity, startLevel, endLevel) {
         resourcesNeeded.pos += resourceValues.pos[i];
     }
 
-   //console.log(resourcesNeeded);
+   console.log(resourcesNeeded);
 }
