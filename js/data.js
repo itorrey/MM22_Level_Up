@@ -17,6 +17,9 @@ const resourceValues = {
     "flags": [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,5,0,10,0,15,0,20,0,25,0,25,0,25,0,25,0,25,0]
 }
 
+function updateResourceList(startLevel, endLevel) {
+    console.log(startLevel, endLevel);
+}
 
 function getResources(rarity, startLevel, endLevel) {
     let resourcesNeeded = {
@@ -41,7 +44,5 @@ function getResources(rarity, startLevel, endLevel) {
         resourcesNeeded.pos += resourceValues.pos[i];
     }
 
-   console.log(resourcesNeeded);
+   //console.log(resourcesNeeded);
 }
-
-getResources("rare", 35, 36);

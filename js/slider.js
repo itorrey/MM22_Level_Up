@@ -19,6 +19,7 @@
 
 			numberS[0].value = slide1;
 			numberS[1].value = slide2;
+            updateResourceList(slide1, slide2);
 		}
 	});
 
@@ -35,6 +36,7 @@
 
 			rangeS[0].value = number1;
 			rangeS[1].value = number2;
+            updateResourceList(number1, number2);
 		}
 	});
 })();
