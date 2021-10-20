@@ -1,4 +1,4 @@
-let slider;
+const slider = document.getElementById('slider');
 const resultsTable = document.querySelector('.resultsTable');
 
 const resourceTypes = {
@@ -31,8 +31,7 @@ const resourceValues = {
     "flags": [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,5,0,10,0,15,0,20,0,25,0,25,0,25,0,25,0,25,0]
 }
 
-function init() {
-    slider = document.getElementById('slider');
+function createSlider() {
 
     noUiSlider.create(slider, {
         start: [0, 20],
@@ -69,19 +68,21 @@ function getResources(rarity, startLevel, endLevel) {
     return resourcesNeeded;
 }
 
-let Format = wNumb({
-	thousand: ','
-});
-
 function updateResourceList(startLevel, endLevel) {
     let results = getResources('rare', parseInt(startLevel), parseInt(endLevel));
     resultsTable.innerHTML = '';
     for (let [key, value] of Object.entries(results)) {
         if(value !== 0) {
-            value = Format.to(value);
+            value = wNumb({
+                thousand: ','
+            }).to(value);
             resultsTable.innerHTML += '<div class="type">'+resourceTypes[key]+'</div><div class="value '+key+'">'+value+'</div>'
         }
     }
+}
+
+function init() {
+    createSlider();
 }
 
 init();
