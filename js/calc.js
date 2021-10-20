@@ -1,3 +1,4 @@
+let slider;
 const resultsTable = document.querySelector('.resultsTable');
 
 const resourceTypes = {
@@ -9,6 +10,27 @@ const resourceTypes = {
     "positionsTier1": "Position Patches",
     "positionsTier2": "Position Patches T2",
     "flags": "Flags"
+}
+
+function init() {
+    slider = document.getElementById('slider');
+
+    noUiSlider.create(slider, {
+        start: [0, 20],
+        connect: true,
+        tooltips: [true, true],
+        step: 1,
+        range: {
+            'min': 0,
+            'max': 50
+        },
+        format: wNumb({
+            decimals: 0,
+        })
+    });
+
+    slider.noUiSlider.on('update', function(values) { updateResourceList(values[0], values[1]);});
+    slider.noUiSlider.set([0, 20]);
 }
 
 const resourceValues = {
@@ -32,7 +54,6 @@ const resourceValues = {
 
 
 function getResources(rarity, startLevel, endLevel) {
-
     let resourcesNeeded = {};
     
     for (const [key] of Object.entries(resourceTypes)) {
@@ -53,17 +74,19 @@ function getResources(rarity, startLevel, endLevel) {
     return resourcesNeeded;
 }
 
-function numberWithCommas(num) {
-    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
+let Format = wNumb({
+	thousand: ','
+});
 
 function updateResourceList(startLevel, endLevel) {
-    let results = getResources('rare', startLevel, endLevel);
+    let results = getResources('rare', parseInt(startLevel), parseInt(endLevel));
     resultsTable.innerHTML = '';
     for (let [key, value] of Object.entries(results)) {
         if(value !== 0) {
-            value = numberWithCommas(value);
+            value = Format.to(value);
             resultsTable.innerHTML += '<div class="type">'+resourceTypes[key]+'</div><div class="value '+key+'">'+value+'</div>'
         }
     }
 }
+
+init();

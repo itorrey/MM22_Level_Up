@@ -9,18 +9,11 @@
         <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
-        <div class="range-slider">
-            <span>from <input type="number" value="0" min="0" max="49" step="1"> to <input type="number" value="50" min="1" max="50" step="1"></span>
-            <input value="0" min="0" max="49" step="1" type="range">
-            <input value="50" min="1" max="50" step="1" type="range">
-            <svg width="100%" height="24">
-                <line x1="4" y1="0" x2="480" y2="0" stroke="#444" stroke-width="12" stroke-dasharray="1 28"></line>
-            </svg>
-        </div>
+        <div id="slider"></div>
         <div class="resultsTable">
         </div>
-
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/wnumb/1.2.0/wNumb.min.js" integrity="sha512-igVQ7hyQVijOUlfg3OmcTZLwYJIBXU63xL9RC12xBHNpmGJAktDnzl9Iw0J4yrSaQtDxTTVlwhY730vphoVqJQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.5.0/nouislider.min.js" integrity="sha512-ZKqmaRVpwWCw7S7mEjC89jDdWRD/oMS0mlfH96mO0u3wrPYoN+lXmqvyptH4P9mY6zkoPTSy5U2SwKVXRY5tYQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="js/calc.js" async defer></script>
-        <script src="js/slider.js" async defer></script>
     </body>
 </html>
