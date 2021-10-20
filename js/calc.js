@@ -2,6 +2,7 @@ const slider = document.getElementById('slider');
 const resultsTable = document.querySelector('.resultsTable');
 const teamSelect = document.getElementById('team');
 const raritySelect = document.getElementById('rarity');
+const positionSelect = document.getElementById('position');
 
 const resourceTypes = {
     "coins": "Coins",
@@ -9,8 +10,8 @@ const resourceTypes = {
     "tp": "Training Points",
     "helmetsTier1": "Helmets",
     "helmetsTier2": "Helmets Tier 2",
-    "positionsTier1": "Position Patches",
-    "positionsTier2": "Position Patches Tier 2",
+    "positionsTier1": "Patches",
+    "positionsTier2": "Patches Tier 2",
     "flags": "Flags"
 }
 
@@ -68,6 +69,25 @@ const teams = {
     "Vikings": ["NFC", "North"]
 }
 
+const positionValues = {
+    "passOffense": {
+        "label": "Pass Off.",
+        "positions": ['QB', 'WR', 'TE', 'P']
+    },
+    "rushOffense": {
+        "label": "Rush Off.",
+        "positions": ['HB','FB', 'OT', 'OG', 'C', 'K']
+    },
+    "passDefense": {
+        "label": "Pass Def.",
+        "positions": ['CB','S','PR']
+    },
+    "rushDefense": {
+        "label": "Rush Def.",
+        "positions": ['DE', 'DT', 'LB', 'MLB', 'KR']
+    }
+}
+
 function createSlider() {
     noUiSlider.create(slider, {
         start: [0, 20],
@@ -93,6 +113,21 @@ function populateTeamSelect() {
     }
 }
 
+function populatePositionSelect() {
+    for (const [key, value] of Object.entries(positionValues)) {
+        let group = document.createElement("optgroup");
+        group.label = positionValues[key].label;
+        
+        positionValues[key].positions.forEach((item) => {
+            let pos = document.createElement("option");
+            pos.value = key;
+            pos.innerHTML = item;
+            group.append(pos);
+        });
+        positionSelect.append(group);
+    }
+}
+
 function getConference(division = false) {
     if(division) {
         return `${teams[teamSelect.value][0]} ${teams[teamSelect.value][1]}`;
@@ -101,7 +136,16 @@ function getConference(division = false) {
     }
 }
 
-function getResources() {
+function getPosition() {
+    let val = positionSelect.value;
+    if(val) {
+        return positionValues[val].label + " ";
+    } else {
+        return "Position ";
+    }
+}
+
+function getResourceNeeds() {
     let needs = {};
 
     //Get the start and end levels of the slider
@@ -126,7 +170,7 @@ function getResources() {
 }
 
 function updateResourceList() {
-    let results = getResources();
+    let results = getResourceNeeds();
     resultsTable.innerHTML = '';
     for (let [key, value] of Object.entries(results)) {
         if(value !== 0) {
@@ -141,6 +185,8 @@ function updateResourceList() {
                 key == "flags" ? showDivision = true : showDivision = false;
                 let conference = getConference(showDivision);
                 label = `${conference} ${resourceTypes[key]}`;
+            } else if(key.includes("position")){
+                label = getPosition() + `${resourceTypes[key]}`
             } else {
                 label = resourceTypes[key];
             }
@@ -152,9 +198,11 @@ function updateResourceList() {
 
 function init() {
     populateTeamSelect();
+    populatePositionSelect();
     createSlider();
     teamSelect.addEventListener('change', updateResourceList);
     raritySelect.addEventListener('change', updateResourceList);
+    positionSelect.addEventListener('change', updateResourceList);
 }
 
 init();
