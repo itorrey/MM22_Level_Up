@@ -57,17 +57,13 @@ function getResources(rarity, startLevel, endLevel) {
     
     for (const [key] of Object.entries(resourceTypes)) {
         resourcesNeeded[key] = 0;
-    }
-
-    for(let i=startLevel; i< endLevel; i++) {
-        resourcesNeeded.coins += resourceValues.coins[rarity][i];
-        resourcesNeeded.trophies += resourceValues.trophies[rarity][i];
-        resourcesNeeded.tp += resourceValues.tp[i];
-        resourcesNeeded.helmetsTier1 += resourceValues.helmetsTier1[i];
-        resourcesNeeded.helmetsTier2 += resourceValues.helmetsTier2[i];
-        resourcesNeeded.positionsTier1 += resourceValues.positionsTier1[i];
-        resourcesNeeded.positionsTier2 += resourceValues.positionsTier2[i];
-        resourcesNeeded.flags += resourceValues.flags[i];
+        for(let i=startLevel; i< endLevel; i++) {
+            if(key == "coins" || key == "trophies") {
+                resourcesNeeded[key] += resourceValues[key][rarity][i];
+            } else {
+                resourcesNeeded[key] += resourceValues[key][i];
+            }
+        }
     }
 
     return resourcesNeeded;
