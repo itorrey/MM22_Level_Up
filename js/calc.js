@@ -93,8 +93,12 @@ function populateTeamSelect() {
     }
 }
 
-function getConference() {
-    return teams[teamSelect.value][0];
+function getConference(division = false) {
+    if(division) {
+        return `${teams[teamSelect.value][0]} ${teams[teamSelect.value][1]}`;
+    } else {
+        return teams[teamSelect.value][0];
+    }
 }
 
 function getResources() {
@@ -122,7 +126,6 @@ function getResources() {
 }
 
 function updateResourceList() {
- 
     let results = getResources();
     resultsTable.innerHTML = '';
     for (let [key, value] of Object.entries(results)) {
@@ -133,8 +136,10 @@ function updateResourceList() {
             
             let label = "";
 
-            if(key.includes("helmet")){
-                let conference = getConference();
+            if(key.includes("helmet") || key.includes("flag")){
+                let showDivision;
+                key == "flags" ? showDivision = true : showDivision = false;
+                let conference = getConference(showDivision);
                 label = `${conference} ${resourceTypes[key]}`;
             } else {
                 label = resourceTypes[key];
