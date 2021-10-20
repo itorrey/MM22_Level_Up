@@ -16,7 +16,6 @@ body {
 }
 
 .ui {
-    width: 980px;
     justify-content: center;
     align-items: center;
     display: flex;
@@ -24,13 +23,13 @@ body {
 
 .controls {
     flex: 0 0 1;
-    width: 50%;
     max-width: 285px;
 }
 
 .titleImage {
     display: block;
     width: 100%;
+    min-width: 250px;
     margin-bottom: 1rem;
 }
 
@@ -95,6 +94,7 @@ body {
 
 .type {
     padding-left: 1rem;
+    min-width: 220px;
 }
 
 
