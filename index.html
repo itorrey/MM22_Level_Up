@@ -10,8 +10,24 @@
     </head>
     <body>
         <div id="slider"></div>
-        <div class="resultsTable">
-        </div>
+        <div class="resultsTable"></div>
+
+        <select id="rarity">
+            <option value="uncommon">Uncommon</option>
+            <option value="rare">Rare</option>
+            <option value="epic">Epic</option>
+        </select>
+        <select id="team"></select>
+
+        <!--
+            
+            Position Patches
+                Pass Offense: QB, WR, TE, P
+                Rush Offense: HB, FB, OT, OG, C, K
+                Pass Defense: CB, S, PR
+                Rush Defense: DE, DT, LB, MLB, KR
+        -->
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/wnumb/1.2.0/wNumb.min.js" integrity="sha512-igVQ7hyQVijOUlfg3OmcTZLwYJIBXU63xL9RC12xBHNpmGJAktDnzl9Iw0J4yrSaQtDxTTVlwhY730vphoVqJQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.5.0/nouislider.min.js" integrity="sha512-ZKqmaRVpwWCw7S7mEjC89jDdWRD/oMS0mlfH96mO0u3wrPYoN+lXmqvyptH4P9mY6zkoPTSy5U2SwKVXRY5tYQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="js/calc.js" async defer></script>

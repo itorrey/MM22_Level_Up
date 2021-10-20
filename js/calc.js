@@ -1,14 +1,16 @@
 const slider = document.getElementById('slider');
 const resultsTable = document.querySelector('.resultsTable');
+const teamSelect = document.getElementById('team');
+const raritySelect = document.getElementById('rarity');
 
 const resourceTypes = {
     "coins": "Coins",
     "trophies": "Trophies",
     "tp": "Training Points",
     "helmetsTier1": "Helmets",
-    "helmetsTier2": "Helmets T2",
+    "helmetsTier2": "Helmets Tier 2",
     "positionsTier1": "Position Patches",
-    "positionsTier2": "Position Patches T2",
+    "positionsTier2": "Position Patches Tier 2",
     "flags": "Flags"
 }
 
@@ -31,8 +33,42 @@ const resourceValues = {
     "flags": [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,5,0,10,0,15,0,20,0,25,0,25,0,25,0,25,0,25,0]
 }
 
-function createSlider() {
+const teams = {
+    "49ers": ["NFC", "West"],
+    "Bears": ["NFC", "North"],
+    "Bengals": ["AFC", "North"],
+    "Bills": ["AFC", "East"],
+    "Broncos": ["AFC", "West"],
+    "Browns": ["AFC", "North"],
+    "Buccaneers": ["NFC", "South"],
+    "Cardinals": ["NFC", "West"],
+    "Chargers": ["AFC", "West"],
+    "Chiefs": ["AFC", "West"],
+    "Colts": ["AFC", "South"],
+    "Cowboys": ["NFC", "East"],
+    "Dolphins": ["AFC", "East"],
+    "Eagles": ["NFC", "East"],
+    "Falcons": ["NFC", "South"],
+    "Football Team": ["NFC", "East"],
+    "Giants": ["NFC", "East"],
+    "Jaguars": ["AFC", "South"],
+    "Jets": ["AFC", "East"],
+    "Lions": ["NFC", "North"],
+    "Packers": ["NFC", "North"],
+    "Panthers": ["NFC", "South"],
+    "Patriots": ["AFC", "East"],
+    "Raiders": ["AFC", "West"],
+    "Rams": ["NFC", "West"],
+    "Ravens": ["AFC", "North"],
+    "Saints": ["NFC", "South"],
+    "Seahawks": ["NFC", "West"],
+    "Steelers": ["AFC", "North"],
+    "Texans": ["AFC", "South"],
+    "Titans": ["AFC", "South"],
+    "Vikings": ["NFC", "North"]
+}
 
+function createSlider() {
     noUiSlider.create(slider, {
         start: [0, 20],
         connect: true,
@@ -47,42 +83,73 @@ function createSlider() {
         })
     });
 
-    slider.noUiSlider.on('update', function(values) { updateResourceList(values[0], values[1]);});
+    slider.noUiSlider.on('update', function(values) { updateResourceList();});
     slider.noUiSlider.set([0, 20]);
 }
 
-function getResources(rarity, startLevel, endLevel) {
-    let resourcesNeeded = {};
+function populateTeamSelect() {
+    for (const [key] of Object.entries(teams)) {
+        teamSelect.innerHTML += `<option value="${key}">${key}</option>`;
+    }
+}
+
+function getConference() {
+    return teams[teamSelect.value][0];
+}
+
+function getResources() {
+    let needs = {};
+
+    //Get the start and end levels of the slider
+    let range = slider.noUiSlider.get();
+    let startLevel = parseInt(range[0]);
+    let endLevel = parseInt(range[1]);
+
+    let rarity = raritySelect.value;
     
     for (const [key] of Object.entries(resourceTypes)) {
-        resourcesNeeded[key] = 0;
+        needs[key] = 0;
         for(let i=startLevel; i< endLevel; i++) {
             if(key == "coins" || key == "trophies") {
-                resourcesNeeded[key] += resourceValues[key][rarity][i];
+                needs[key] += resourceValues[key][rarity][i];
             } else {
-                resourcesNeeded[key] += resourceValues[key][i];
+                needs[key] += resourceValues[key][i];
             }
         }
     }
 
-    return resourcesNeeded;
+    return needs;
 }
 
-function updateResourceList(startLevel, endLevel) {
-    let results = getResources('rare', parseInt(startLevel), parseInt(endLevel));
+function updateResourceList() {
+ 
+    let results = getResources();
     resultsTable.innerHTML = '';
     for (let [key, value] of Object.entries(results)) {
         if(value !== 0) {
             value = wNumb({
                 thousand: ','
             }).to(value);
-            resultsTable.innerHTML += '<div class="type">'+resourceTypes[key]+'</div><div class="value '+key+'">'+value+'</div>'
+            
+            let label = "";
+
+            if(key.includes("helmet")){
+                let conference = getConference();
+                label = `${conference} ${resourceTypes[key]}`;
+            } else {
+                label = resourceTypes[key];
+            }
+
+            resultsTable.innerHTML += `<div class="type">${label}</div><div class="value ${key}">${value}</div>`;
         }
     }
 }
 
 function init() {
+    populateTeamSelect();
     createSlider();
+    teamSelect.addEventListener('change', updateResourceList);
+    raritySelect.addEventListener('change', updateResourceList);
 }
 
 init();
