@@ -15,3 +15,62 @@ body {
     grid-column-gap: 0px;
     grid-row-gap: 0px;
 }
+
+.value {
+    padding-left: 36px;
+    background-position: 0 50%;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.value.coins {
+    background-image: url("../images/coin.png");
+}
+.value.trophies {
+    background-image: url("../images/trophy.png");
+}
+.value.tp {
+    background-image: url("../images/tp.png");
+}
+.value.helmetsTier1.NFC {
+    background-image: url("../images/helmetNfc.png");
+}
+.value.helmetsTier1.AFC {
+    background-image: url("../images/helmetAfc.png");
+}
+.value.helmetsTier2.NFC {
+    background-image: url("../images/helmetNfcT2.png");
+}
+.value.helmetsTier2.AFC {
+    background-image: url("../images/helmetAfcT2.png");
+}
+.value.positionsTier1.passOffense {
+    background-image: url("../images/patchPassOff.png");
+}
+.value.positionsTier1.passDefense {
+    background-image: url("../images/patchPassDef.png");
+}
+.value.positionsTier1.rushOffense {
+    background-image: url("../images/patchRushOff.png");
+}
+.value.positionsTier1.rushDefense {
+    background-image: url("../images/patchRushDef.png");
+}
+.value.positionsTier2.passOffense {
+    background-image: url("../images/patchPassOffT2.png");
+}
+.value.positionsTier2.passDefense {
+    background-image: url("../images/patchPassDefT2.png");
+}
+.value.positionsTier2.rushOffense {
+    background-image: url("../images/patchRushOffT2.png");
+}
+.value.positionsTier2.rushDefense {
+    background-image: url("../images/patchRushDefT2.png");
+}
+.value.flags.AFC {
+    background-image: url("../images/flagAfc.png");
+}
+.value.flags.NFC {
+    background-image: url("../images/flagNFC.png");
+}

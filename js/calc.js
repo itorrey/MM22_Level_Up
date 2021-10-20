@@ -136,10 +136,15 @@ function getConference(division = false) {
     }
 }
 
-function getPosition() {
+function getPosition(pretty=true) {
     let val = positionSelect.value;
+    
     if(val) {
-        return positionValues[val].label + " ";
+        if(pretty) {
+            return positionValues[val].label + " ";
+        } else {
+            return val;
+        }
     } else {
         return "Position ";
     }
@@ -179,19 +184,24 @@ function updateResourceList() {
             }).to(value);
             
             let label = "";
+            let valueClass = key;
 
-            if(key.includes("helmet") || key.includes("flag")){
-                let showDivision;
-                key == "flags" ? showDivision = true : showDivision = false;
-                let conference = getConference(showDivision);
+            if(key.includes("helmet")){
+                valueClass += ` ${getConference(false)}`;
+                let conference = getConference();
+                label = `${conference} ${resourceTypes[key]}`;
+            } else if(key.includes("flag")){
+                valueClass += ` ${getConference(false)}`;
+                let conference = getConference(true);
                 label = `${conference} ${resourceTypes[key]}`;
             } else if(key.includes("position")){
                 label = getPosition() + `${resourceTypes[key]}`
+                valueClass += ` ${getPosition(false)}`;
             } else {
                 label = resourceTypes[key];
             }
 
-            resultsTable.innerHTML += `<div class="type">${label}</div><div class="value ${key}">${value}</div>`;
+            resultsTable.innerHTML += `<div class="type">${label}</div><div class="value ${valueClass}">${value}</div>`;
         }
     }
 }
