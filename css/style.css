@@ -1,7 +1,21 @@
 @import "nouislider.css";
 
 body {
-    padding: 2rem;
+    background: #0E0E0E;
+    color: #fff;
+}
+
+.uiContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.ui {
+    width: 100vw;
+    max-width: 900px;
 }
 
 #slider {
