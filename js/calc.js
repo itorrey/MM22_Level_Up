@@ -30,6 +30,7 @@ const resourceValues = {
     "flags": [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,5,0,10,0,15,0,20,0,25,0,25,0,25,0,25,0,25,0]
 }
 
+
 function getResources(rarity, startLevel, endLevel) {
 
     let resourcesNeeded = {};
@@ -52,11 +53,16 @@ function getResources(rarity, startLevel, endLevel) {
     return resourcesNeeded;
 }
 
+function numberWithCommas(num) {
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 function updateResourceList(startLevel, endLevel) {
     let results = getResources('rare', startLevel, endLevel);
     resultsTable.innerHTML = '';
-    for (const [key, value] of Object.entries(results)) {
+    for (let [key, value] of Object.entries(results)) {
         if(value !== 0) {
+            value = numberWithCommas(value);
             resultsTable.innerHTML += '<div class="type">'+resourceTypes[key]+'</div><div class="value '+key+'">'+value+'</div>'
         }
     }
