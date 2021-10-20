@@ -98,6 +98,7 @@ function createSlider() {
             'min': 0,
             'max': 50
         },
+        margin: 1,
         format: wNumb({
             decimals: 0,
         })
