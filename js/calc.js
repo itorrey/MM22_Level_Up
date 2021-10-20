@@ -183,8 +183,9 @@ function updateResourceList() {
                 thousand: ','
             }).to(value);
             
-            let label = "";
+            //valueClass allows for more granular styling for the icons
             let valueClass = key;
+            let label = "";
 
             if(key.includes("helmet")){
                 valueClass += ` ${getConference(false)}`;
