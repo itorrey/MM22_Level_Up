@@ -3,6 +3,7 @@
 body {
     background: #0E0E0E;
     color: #fff;
+    padding: 2rem;
 }
 
 .uiContainer {
@@ -10,12 +11,20 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
 }
 
 .ui {
-    width: 100vw;
     max-width: 900px;
+    display: flex;
+}
+
+.controls {
+    flex: 0 0 1;
+}
+
+.controls select {
+    display: block;
+    width: 100%;
 }
 
 #slider {
