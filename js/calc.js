@@ -6,8 +6,8 @@ const positionSelect = document.getElementById('position');
 
 const resourceTypes = {
     "coins": "Coins",
-    "trophies": "Trophies",
     "tp": "Training Points",
+    "trophies": "Trophies",
     "helmetsTier1": "Helmets",
     "helmetsTier2": "Helmets Tier 2",
     "positionsTier1": "Patches",
