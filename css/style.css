@@ -19,31 +19,47 @@ body {
     justify-content: center;
     align-items: center;
     display: flex;
+    flex-direction: column;
 }
 
 .controls {
-    flex: 0 0 1;
-    max-width: 285px;
+    width: 100%;
 }
 
 .titleImage {
     display: block;
     width: 100%;
-    min-width: 250px;
     margin-bottom: 1rem;
+    height: 48px;
 }
 
-.controls select {
-    display: block;
+.controls {
+    width: 100%;
+}
+
+.inputs {
+    display: flex;
+}
+
+.inputs div {
+    flex: 0 0 33%;
+}
+
+.inputs div:nth-child(2) {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+.inputs select {
     width: 100%;
     margin-bottom: 1rem;
     background-color: #353535;
-    border-color: #000000;
+    border-color: #5c3a3a;
     color: #fff;
     min-height: 28px;
 }
 
-.controls label {
+.inputs label {
     color: #A2EA87;
     font-size: 0.85rem;
     display: block;
@@ -52,7 +68,10 @@ body {
 }
 
 #slider {
-    margin-top: 4rem;
+    margin: 2rem 0;
+    width: 100%;
+    padding: 0 16px;
+
 }
 .noUi-target {
     background-color: #383838;
@@ -69,11 +88,8 @@ body {
 }
 
 .results {
-    flex: 1 1 1;
-    padding-left: 2rem;
-    max-width: 500px;
+    flex: 0 0 auto;
     width: 100%;
-
 }
 
 .resultsTable {
